@@ -1,9 +1,12 @@
+import java.awt.Component;
+import java.awt.event.KeyListener;
+
 import javax.swing.JFrame;
 
 public class Game {
 	JFrame frame = new JFrame();
-	public static final int WIDTH = 500;
-	public static final int HEIGHT = 800;
+	public static final int WIDTH = 1000;
+	public static final int HEIGHT = 1000;
 	GamePanel gPanel = new GamePanel();
 	
 	public static void main(String[] args) {
@@ -11,10 +14,11 @@ public class Game {
 	dog.setup();
 }
 	void setup() {
-		frame.add(gPanel);
+		
 		frame.setSize(WIDTH, HEIGHT);
 		frame.setVisible(true);
-		frame.addKeyListener(gPanel);
+		frame.add(gPanel);
+	
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 	}
