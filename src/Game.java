@@ -1,5 +1,3 @@
-import java.awt.Component;
-import java.awt.event.KeyListener;
 
 import javax.swing.JFrame;
 
