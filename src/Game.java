@@ -19,12 +19,9 @@ public class Game {
 	
 		frame.add(gPanel);
 	
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.addKeyListener(gPanel);
 	}
 
-	private void setDefaultCloseOperation(int exitOnClose) {
-		// TODO Auto-generated method stub
-
-	}
+	
 }

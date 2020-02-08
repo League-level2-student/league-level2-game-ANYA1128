@@ -6,8 +6,10 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
+import java.util.Random;
 
 import javax.imageio.ImageIO;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -21,21 +23,27 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	int HEIGHT = 1000;
 	int currentState = MENU;
 	Timer timer;
+	int xvalue = new Random().nextInt(800);
+	int yvalue = new Random().nextInt(800-300)+400;
 	public static BufferedImage image;
 	public static BufferedImage image2;
 	public static BufferedImage image3;
+	public static BufferedImage image4;
 	public static boolean needImage = true;
 	public static boolean gotImage = false;
 
 	Font titleFont = new Font("Comic Sans", Font.PLAIN, 48);
 	Font instructionsFont = new Font("Comic Sans", Font.PLAIN, 23);
 	Font scoreFont = new Font("Comic Sans", Font.PLAIN, 35);
+	
+	//Dog dog = new Dog(400, 600, 200, 200);
+	//ObjectManager obj = new ObjectManager(dog);
 
 	GamePanel() {
 		loadImage();
 		//frame.addKeyListener(this);
 		//repaint();
-		//startGame();
+		startGame();
 	}
 
 	public void startGame() {
@@ -62,6 +70,9 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 				image = ImageIO.read(this.getClass().getResourceAsStream("background.jpg"));
 				image2 = ImageIO.read(this.getClass().getResourceAsStream("download.png"));
 				image3 = ImageIO.read(this.getClass().getResourceAsStream("river.jpg"));
+				image4 = ImageIO.read(this.getClass().getResourceAsStream("rock.png"));
+
+				
 				gotImage = true;
 			} catch (Exception e) {
 
@@ -95,8 +106,12 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	}
 
 	void drawGameState(Graphics g) {
-		g.drawImage(image, 0, 0, Game.WIDTH, Game.HEIGHT, null);
-		g.drawImage(image3, 400, 600, 200, 200, null);
+		
+		g.drawImage(image3, 0, 0, Game.WIDTH, Game.HEIGHT, null);
+		g.drawImage(image2, 150, 800, 150, 150, null);
+		g.drawImage(image4, xvalue, 850, 180, 150, null);
+		
+		
 	}
 
 	void drawEndState(Graphics g) {
@@ -113,6 +128,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		repaint();
+		xvalue++;
 	}
 
 	@Override
@@ -132,8 +148,11 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 			}
 		
 		}
-		else if(e.getKeyCode() == KeyEvent.VK_ENTER) {
+		if(e.getKeyCode() == KeyEvent.VK_ENTER) {
 			currentState++;
+			if(currentState==GAME) {
+			JOptionPane.showMessageDialog(null, "Welcome to your first task! Use the arrow keys to move onto the moving rocks. Jump by pressing the space bar. Good luck!");
+			}
 			System.out.println(currentState);
 		}
 		repaint();
