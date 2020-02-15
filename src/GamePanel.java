@@ -36,8 +36,8 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	Font instructionsFont = new Font("Comic Sans", Font.PLAIN, 23);
 	Font scoreFont = new Font("Comic Sans", Font.PLAIN, 35);
 	
-	//Dog dog = new Dog(400, 600, 200, 200);
-	//ObjectManager obj = new ObjectManager(dog);
+	Dog dog = new Dog(300, 800, 200, 200);
+	ObjectManager obj = new ObjectManager();
 
 	GamePanel() {
 		loadImage();
@@ -57,12 +57,13 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		if (currentState == MENU) {
 			drawMenuState(g);
 		}
-
-		else if (currentState == GAME) {
+		if (currentState == GAME) {
 			drawGameState(g);
-
 		}
-	}
+
+		
+		}
+	
 
 	void loadImage() {
 		if (needImage) {
@@ -82,9 +83,14 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	}
 
 	void updateMenuState() {
+		
 	}
 
 	void updateEndState() {
+		
+	}
+	void updateGameState() {
+		dog.update();
 	}
 
 	void drawMenuState(Graphics g) {
@@ -108,9 +114,13 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	void drawGameState(Graphics g) {
 		
 		g.drawImage(image3, 0, 0, Game.WIDTH, Game.HEIGHT, null);
-		g.drawImage(image2, 150, 800, 150, 150, null);
-		g.drawImage(image4, xvalue, 850, 180, 150, null);
-		
+		dog.draw(g);
+		g.drawImage(image4, xvalue, 750, 180, 150, null);
+		//g.drawImage(image4, xvalue+50, 550, 180, 150, null);
+		//g.drawImage(image4, xvalue-50, 450, 180, 150, null);
+		//g.drawImage(image4, xvalue-100, 650, 180, 150, null);
+		//g.drawImage(image4, xvalue, 350, 180, 150, null);
+		this.repaint();
 		
 	}
 
@@ -129,6 +139,9 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		// TODO Auto-generated method stub
 		repaint();
 		xvalue++;
+		if(currentState==GAME) {
+			updateGameState();
+		}
 	}
 
 	@Override
@@ -146,17 +159,40 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 				JOptionPane.showMessageDialog(null,
 						"Welcome to the Game. This dog has lost its owner and has to return safely. In order to do so, it has to cross the river, avoid obstacles while running in the fields, and identify its owner. Good luck!!");
 			}
+				else if(e.getKeyCode() == KeyEvent.VK_ENTER) {
+					currentState++;
+					
+					JOptionPane.showMessageDialog(null, "Welcome to your first task! Use the arrow keys to move onto the moving rocks. Jump by pressing the space bar. Good luck!");
+					
+					
+					System.out.println(currentState);
+				
+				repaint();
+			}
+			}
+		
+		
+		else if(currentState==GAME) {
+			if (e.getKeyCode() == KeyEvent.VK_UP && dog.y >= 300) {
+				System.out.println("UP");
+				dog.up();
+
+			} else if (e.getKeyCode() == KeyEvent.VK_DOWN && dog.y <=710) {
+				System.out.println("DOWN");
+				dog.down();
+
+			} else if (e.getKeyCode() == KeyEvent.VK_LEFT && dog.x >= 0) {
+				System.out.println("LEFT");
+				dog.left();
+
+			} else if (e.getKeyCode() == KeyEvent.VK_RIGHT && dog.x <= Game.WIDTH-100) {
+				System.out.println("RIGHT");
+				dog.right();
+			}
+		}
 		
 		}
-		if(e.getKeyCode() == KeyEvent.VK_ENTER) {
-			currentState++;
-			if(currentState==GAME) {
-			JOptionPane.showMessageDialog(null, "Welcome to your first task! Use the arrow keys to move onto the moving rocks. Jump by pressing the space bar. Good luck!");
-			}
-			System.out.println(currentState);
-		}
-		repaint();
-	}
+	
 
 	@Override
 	public void keyReleased(KeyEvent e) {

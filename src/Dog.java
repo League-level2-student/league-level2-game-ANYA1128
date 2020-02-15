@@ -15,7 +15,7 @@
 			super.speed = 15;
 			// TODO Auto-generated constructor stub
 			if (needImage) {
-			    loadImage ("good.png");
+			    loadImage ("download.png");
 			}
 		}
 
