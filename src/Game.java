@@ -6,7 +6,7 @@ public class Game {
 	public static final int WIDTH = 1400;
 	public static final int HEIGHT = 1000;
 	GamePanel gPanel= new GamePanel();
-	
+	Rock theRock;
 	public static void main(String[] args) {
 	Game dog = new Game();
 	dog.setup();

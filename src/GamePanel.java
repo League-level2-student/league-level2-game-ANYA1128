@@ -37,7 +37,8 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	Font scoreFont = new Font("Comic Sans", Font.PLAIN, 35);
 	
 	Dog dog = new Dog(300, 800, 200, 200);
-	ObjectManager obj = new ObjectManager();
+	ObjectManager obj = new ObjectManager(dog);
+	Rock theRock;
 
 	GamePanel() {
 		loadImage();
@@ -115,11 +116,13 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		
 		g.drawImage(image3, 0, 0, Game.WIDTH, Game.HEIGHT, null);
 		dog.draw(g);
-		g.drawImage(image4, xvalue, 750, 180, 150, null);
-		//g.drawImage(image4, xvalue+50, 550, 180, 150, null);
-		//g.drawImage(image4, xvalue-50, 450, 180, 150, null);
-		//g.drawImage(image4, xvalue-100, 650, 180, 150, null);
-		//g.drawImage(image4, xvalue, 350, 180, 150, null);
+		
+				g.drawImage(image4, xvalue, i, 180, 150, null);
+			
+		
+		
+		
+		
 		this.repaint();
 		
 	}
@@ -138,7 +141,12 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		repaint();
-		xvalue++;
+		theRock.isActive=false;
+		if(!theRock.isActive) {
+			xvalue++;	
+		}
+		
+		
 		if(currentState==GAME) {
 			updateGameState();
 		}
