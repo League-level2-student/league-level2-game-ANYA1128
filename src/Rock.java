@@ -8,10 +8,11 @@ public class Rock extends GameObject {
 	public static BufferedImage image;
 	public static boolean needImage = true;
 	public static boolean gotImage = false;	
+	public boolean isMoving = true;
 	Rock(int x, int y, int width, int height) {
 		super(x, y, width, height);
 		// TODO Auto-generated constructor stub
-		super.speed = 10;
+		speed = 3;
 		// TODO Auto-generated constructor stub
 		if (needImage) {
 		    loadImage ("rock.png");
@@ -29,8 +30,15 @@ public class Rock extends GameObject {
 	    }
 	}
 	public void update() {
-		y += speed;
-
+		if(isMoving) {
+			x+=speed;	
+		}
+		if(x>Game.WIDTH) {
+			speed=-speed;
+		}
+		else if(x<0) {
+			speed=-speed;
+		}
 		super.update();
 	}
 

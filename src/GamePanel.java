@@ -23,12 +23,12 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	int HEIGHT = 1000;
 	int currentState = MENU;
 	Timer timer;
-	int xvalue = new Random().nextInt(800);
+	int xValue = new Random().nextInt(800);
 	int yvalue = new Random().nextInt(800-300)+400;
 	public static BufferedImage image;
 	public static BufferedImage image2;
 	public static BufferedImage image3;
-	public static BufferedImage image4;
+	public static BufferedImage rock;
 	public static boolean needImage = true;
 	public static boolean gotImage = false;
 
@@ -36,15 +36,16 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	Font instructionsFont = new Font("Comic Sans", Font.PLAIN, 23);
 	Font scoreFont = new Font("Comic Sans", Font.PLAIN, 35);
 	
-	Dog dog = new Dog(300, 800, 200, 200);
+	Dog dog = new Dog(100, 840, 100, 100);
 	ObjectManager obj = new ObjectManager(dog);
-	Rock theRock;
+	Rock theRock = new Rock(xValue, 735, 140, 120);
 
 	GamePanel() {
 		loadImage();
 		//frame.addKeyListener(this);
 		//repaint();
 		startGame();
+		obj.addRock(theRock);
 	}
 
 	public void startGame() {
@@ -72,7 +73,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 				image = ImageIO.read(this.getClass().getResourceAsStream("background.jpg"));
 				image2 = ImageIO.read(this.getClass().getResourceAsStream("download.png"));
 				image3 = ImageIO.read(this.getClass().getResourceAsStream("river.jpg"));
-				image4 = ImageIO.read(this.getClass().getResourceAsStream("rock.png"));
+				rock = ImageIO.read(this.getClass().getResourceAsStream("rock.png"));
 
 				
 				gotImage = true;
@@ -91,7 +92,9 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		
 	}
 	void updateGameState() {
-		dog.update();
+		obj.update();
+		
+		
 	}
 
 	void drawMenuState(Graphics g) {
@@ -115,9 +118,10 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	void drawGameState(Graphics g) {
 		
 		g.drawImage(image3, 0, 0, Game.WIDTH, Game.HEIGHT, null);
-		dog.draw(g);
+		obj.draw(g);
 		
-				g.drawImage(image4, xvalue, i, 180, 150, null);
+		
+		
 			
 		
 		
@@ -141,10 +145,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		repaint();
-		theRock.isActive=false;
-		if(!theRock.isActive) {
-			xvalue++;	
-		}
+		
 		
 		
 		if(currentState==GAME) {
@@ -185,7 +186,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 				System.out.println("UP");
 				dog.up();
 
-			} else if (e.getKeyCode() == KeyEvent.VK_DOWN && dog.y <=710) {
+			} else if (e.getKeyCode() == KeyEvent.VK_DOWN && dog.y <=820) {
 				System.out.println("DOWN");
 				dog.down();
 

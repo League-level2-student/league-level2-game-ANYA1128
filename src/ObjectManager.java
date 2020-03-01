@@ -7,7 +7,7 @@ import java.util.Random;
 public class ObjectManager implements ActionListener {
 	Dog dog;
 	ArrayList<Rock> rocks = new ArrayList<>();
-	Rock theRock;
+	
 	
 	Random random = new Random();
 	int score = 0;
@@ -17,7 +17,7 @@ public class ObjectManager implements ActionListener {
 	}
 
 	void addRock(Rock rock) {
-		//rocks.add(new Rock(xvalue-100, score, score, score));
+		rocks.add(new Rock(300, 760, 130, 120));
 
 	}
 
@@ -30,37 +30,28 @@ int getScore() {
 	void update() {
 		dog.update();
 		for (int i = 0; i < rocks.size(); i++) {
-			rocks.get(i).update();
-			if (rocks.get(i).y >= Game.HEIGHT) {
-				rocks.get(i).isActive = false;
-				
-			}
+			rocks.get(i).update();	
 		}
-		
-		
-		
+	
+		checkCollision();
+		purgeObjects();
 
 	}
 
 	void checkCollision() {
 		for (int i = 0; i < rocks.size(); i++) {
 			if(dog.collisionBox.intersects(rocks.get(i).collisionBox)) {
-				theRock = rocks.get(i);
-				theRock.isActive = true;
+				Rock theRock = rocks.get(i);
+				theRock.isMoving = false;
 				dog.isActive=true;
 				
 				System.out.println("rock has been jumped");
 			}
 			
 		}
-		checkCollision(); 
-		if(theRock.isActive=true) {
-			
-		}
-		purgeObjects();
-				
-			}
-	
+	}
+		
+		
 
 	void draw(Graphics g) {
 
@@ -73,9 +64,9 @@ int getScore() {
 
 	void purgeObjects() {
 		for (int i = 0; i < rocks.size(); i++) {
-			if (rocks.get(i).isActive == false) {
-			
+			if (rocks.get(i).isActive == false) {		
 				rocks.remove(i);
+				System.out.println("something");
 				score++;
 
 			}
