@@ -19,12 +19,13 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	final int MENU = 0;
 	final int GAME = 1;
 	final int END = 2;
+	
 	int WIDTH = 1000;
 	int HEIGHT = 1000;
 	int currentState = MENU;
 	Timer timer;
-	int xValue = new Random().nextInt(800);
-	int yvalue = new Random().nextInt(800-300)+400;
+	
+	static final int yvalue = new Random().nextInt(800-300)+400;
 	public static BufferedImage image;
 	public static BufferedImage image2;
 	public static BufferedImage image3;
@@ -38,14 +39,14 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	
 	Dog dog = new Dog(100, 840, 100, 100);
 	ObjectManager obj = new ObjectManager(dog);
-	Rock theRock = new Rock(xValue, 735, 140, 120);
+	Rock theRock = new Rock(Rock.rockXValue, Rock.rockStartingHeight);
 
 	GamePanel() {
 		loadImage();
 		//frame.addKeyListener(this);
 		//repaint();
 		startGame();
-		obj.addRock(theRock);
+		
 	}
 
 	public void startGame() {

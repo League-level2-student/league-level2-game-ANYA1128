@@ -1,6 +1,7 @@
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
+import java.util.Random;
 
 import javax.imageio.ImageIO;
 
@@ -9,8 +10,13 @@ public class Rock extends GameObject {
 	public static boolean needImage = true;
 	public static boolean gotImage = false;	
 	public boolean isMoving = true;
-	Rock(int x, int y, int width, int height) {
-		super(x, y, width, height);
+	final static int rockWidth=140;
+	final static int rockHeight=120;
+	
+	static int rockStartingHeight = 820;
+	static final int rockXValue = new Random().nextInt(800);
+	Rock(int x, int y) {
+		super(x, y, rockWidth, rockHeight);
 		// TODO Auto-generated constructor stub
 		speed = 3;
 		// TODO Auto-generated constructor stub
