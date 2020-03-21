@@ -32,12 +32,14 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	public static BufferedImage rock;
 	public static boolean needImage = true;
 	public static boolean gotImage = false;
+	int dogX=50;
+	int dogY=870;
 
 	Font titleFont = new Font("Comic Sans", Font.PLAIN, 48);
 	Font instructionsFont = new Font("Comic Sans", Font.PLAIN, 23);
 	Font scoreFont = new Font("Comic Sans", Font.PLAIN, 35);
 	
-	Dog dog = new Dog(100, 840, 100, 100);
+	Dog dog = new Dog(dogX,dogY, 100, 100);
 	ObjectManager obj = new ObjectManager(dog);
 	Rock theRock = new Rock(Rock.rockXValue, Rock.rockStartingHeight);
 
@@ -183,7 +185,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		
 		
 		else if(currentState==GAME) {
-			if (e.getKeyCode() == KeyEvent.VK_UP && dog.y >= 300) {
+			if (e.getKeyCode() == KeyEvent.VK_UP && dog.y >= 300&&dog.isActive) {
 				System.out.println("UP");
 				dog.up();
 
@@ -207,7 +209,8 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	@Override
 	public void keyReleased(KeyEvent e) {
 		// TODO Auto-generated method stub
-
+dog.XSpeed=0;
+dog.YSpeed=0;
 	}
 
 }

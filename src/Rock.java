@@ -10,10 +10,10 @@ public class Rock extends GameObject {
 	public static boolean needImage = true;
 	public static boolean gotImage = false;	
 	public boolean isMoving = true;
-	final static int rockWidth=140;
-	final static int rockHeight=120;
+	final static int rockWidth=100;
+	final static int rockHeight=80;
 	
-	static int rockStartingHeight = 820;
+	static int rockStartingHeight = 870;
 	static final int rockXValue = new Random().nextInt(800);
 	Rock(int x, int y) {
 		super(x, y, rockWidth, rockHeight);

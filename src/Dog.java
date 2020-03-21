@@ -9,10 +9,11 @@
 		public static BufferedImage image;
 		public static boolean needImage = true;
 		public static boolean gotImage = false;	
-
+		int XSpeed =0;
+		int YSpeed = 0;
 		Dog(int x, int y, int width, int height) {
 			super(x, y, width, height);
-			super.speed = 15;
+			super.speed = 5;
 			// TODO Auto-generated constructor stub
 			if (needImage) {
 			    loadImage ("download.png");
@@ -46,20 +47,25 @@
 		}
 		
 		public void right() {
-			x += speed;
+			XSpeed = speed;
 		}
 
 		public void left() {
-			x -= speed;
+			XSpeed = -speed;
 		}
 
 		public void down() {
-			y += speed;
+			YSpeed = speed;
 		}
 
 		public void up() {
-			y -= speed;
+			YSpeed = -speed;
 		}
+	public void update() {
+		super.update();
+		x+=XSpeed;
+		y+=YSpeed;
+	}
 	}
 
 

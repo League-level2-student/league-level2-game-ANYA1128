@@ -46,12 +46,14 @@ public class ObjectManager implements ActionListener {
 				Rock theRock = rocks.get(i);
 				theRock.isMoving = false;
 				dog.isActive = true;
+				
 
 			}
 
 			System.out.println("rock has been jumped");
 
 		}
+	
 
 		boolean rocksMoving = false;
 		for (int v = 0; v < rocks.size(); v++) {
@@ -74,11 +76,11 @@ public class ObjectManager implements ActionListener {
 
 	void draw(Graphics g) {
 
-		dog.draw(g);
+		
 		for (int i = 0; i < rocks.size(); i++) {
 			rocks.get(i).draw(g);
 		}
-
+		dog.draw(g);
 	}
 
 	void purgeObjects() {
