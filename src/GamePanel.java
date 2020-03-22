@@ -185,21 +185,21 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		
 		
 		else if(currentState==GAME) {
-			if (e.getKeyCode() == KeyEvent.VK_UP && dog.y >= 300&&dog.isActive) {
+			if (e.getKeyCode() == KeyEvent.VK_UP && dog.isActive) {
 				System.out.println("UP");
-				dog.up();
+				dog.up=true;
 
-			} else if (e.getKeyCode() == KeyEvent.VK_DOWN && dog.y <=820) {
+			} else if (e.getKeyCode() == KeyEvent.VK_DOWN ) {
 				System.out.println("DOWN");
-				dog.down();
+				dog.down=true;
 
-			} else if (e.getKeyCode() == KeyEvent.VK_LEFT && dog.x >= 0) {
+			} else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
 				System.out.println("LEFT");
-				dog.left();
+				dog.left=true;
 
-			} else if (e.getKeyCode() == KeyEvent.VK_RIGHT && dog.x <= Game.WIDTH-100) {
+			} else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
 				System.out.println("RIGHT");
-				dog.right();
+				dog.right=true;
 			}
 		}
 		
@@ -209,8 +209,22 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	@Override
 	public void keyReleased(KeyEvent e) {
 		// TODO Auto-generated method stub
-dog.XSpeed=0;
-dog.YSpeed=0;
+		if (e.getKeyCode() == KeyEvent.VK_UP && dog.isActive) {
+			System.out.println("UP");
+			dog.up=false;
+
+		} else if (e.getKeyCode() == KeyEvent.VK_DOWN ) {
+			System.out.println("DOWN");
+			dog.down=false;
+
+		} else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+			System.out.println("LEFT");
+			dog.left=false;
+
+		} else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+			System.out.println("RIGHT");
+			dog.right=false;
+		}
 	}
 
 }

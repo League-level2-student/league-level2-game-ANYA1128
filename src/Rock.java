@@ -10,6 +10,7 @@ public class Rock extends GameObject {
 	public static boolean needImage = true;
 	public static boolean gotImage = false;	
 	public boolean isMoving = true;
+	public boolean isMovingBackwards = false;
 	final static int rockWidth=100;
 	final static int rockHeight=80;
 	
@@ -38,6 +39,9 @@ public class Rock extends GameObject {
 	public void update() {
 		if(isMoving) {
 			x+=speed;	
+		}
+		if(isMovingBackwards) {
+			x-=speed;	
 		}
 		if(x>Game.WIDTH) {
 			speed=-speed;

@@ -1,8 +1,12 @@
+import java.awt.Component;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Random;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 public class ObjectManager implements ActionListener {
 	Dog dog;
@@ -15,6 +19,7 @@ public class ObjectManager implements ActionListener {
 	ObjectManager(Dog dog) {
 		this.dog = dog;
 	}
+
 
 	void addRock(Rock rock) {
 		rocks.add(rock);
@@ -45,7 +50,16 @@ public class ObjectManager implements ActionListener {
 			if (dog.collisionBox.intersects(rocks.get(i).collisionBox)) {
 				Rock theRock = rocks.get(i);
 				theRock.isMoving = false;
+				
+				
+				
+				theRock.y=dog.y;
+				theRock.isMovingBackwards = true;
+				dog.x=theRock.x;
+				theRock.update();
+				score++;
 				dog.isActive = true;
+				
 				
 
 			}
@@ -98,6 +112,6 @@ public class ObjectManager implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		addAlien();
+		
 	}
 }
