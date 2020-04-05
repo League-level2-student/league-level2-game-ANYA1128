@@ -39,7 +39,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	Font instructionsFont = new Font("Comic Sans", Font.PLAIN, 23);
 	Font scoreFont = new Font("Comic Sans", Font.PLAIN, 35);
 	
-	Dog dog = new Dog(dogX,dogY, 100, 100);
+	Dog dog = new Dog(dogX,dogY,50, 50);
 	ObjectManager obj = new ObjectManager(dog);
 	Rock theRock = new Rock(Rock.rockXValue, Rock.rockStartingHeight);
 
@@ -66,7 +66,9 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 			drawGameState(g);
 		}
 
-		
+		if (currentState == END) {
+			drawGameState(g);
+		}
 		}
 	
 

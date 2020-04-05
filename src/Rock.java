@@ -11,8 +11,8 @@ public class Rock extends GameObject {
 	public static boolean gotImage = false;	
 	public boolean isMoving = true;
 	public boolean isMovingBackwards = false;
-	final static int rockWidth=100;
-	final static int rockHeight=80;
+	final static int rockWidth=75;
+	final static int rockHeight=60;
 	
 	static int rockStartingHeight = 870;
 	static final int rockXValue = new Random().nextInt(800);

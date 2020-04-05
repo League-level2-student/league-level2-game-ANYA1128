@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 public class ObjectManager implements ActionListener {
@@ -17,12 +18,10 @@ public class ObjectManager implements ActionListener {
 
 	Random random = new Random();
 	int score = 0;
-	
 
 	ObjectManager(Dog dog) {
 		this.dog = dog;
 	}
-
 
 	void addRock(Rock rock) {
 		rocks.add(rock);
@@ -49,28 +48,24 @@ public class ObjectManager implements ActionListener {
 	}
 
 	void checkCollision() {
+		dogIsOnRock = false;
 		for (int i = 0; i < rocks.size(); i++) {
 			if (dog.collisionBox.intersects(rocks.get(i).collisionBox)) {
 				Rock theRock = rocks.get(i);
+				// Rock prevRock = rocks.get(i-1);
 				theRock.isMoving = false;
-				
-				
-				
-				
+
 				theRock.isMovingBackwards = true;
-				dog.x=theRock.x;
-				if(theRock.isMovingBackwards && dog.x==theRock.x) {
-					dogIsOnRock=true;
-				}
-				
-				
-				theRock.update();
+				dog.x = theRock.x;
+			
+				dogIsOnRock = true;
 				score++;
-				dog.isActive = true;
+
 				
+				 
+				theRock.update();
 				
-				
-				
+				// dog.isActive = true;
 
 			}
 			
@@ -106,18 +101,15 @@ public class ObjectManager implements ActionListener {
 //
 //			
 
-			System.out.println("rock has been jumped");
+			// System.out.println("rock has been jumped");
 
 		}
+		//add what needs to be done in case the dog is in the water
+		if(dog.y<=820&&dog.y>=300&&!dogIsOnRock) {
+			JOptionPane.showMessageDialog(null, "You have lost the game. This is your score: "+score);
+			System.exit(0);
+		}
 		
-		if(dog.up||dog.down||dog.left||dog.right) {
-			dogIsOnRock=false;
-		}
-		if(dogIsOnRock=false) {
-			dog.update(); 
-			
-		}
-	
 
 		boolean rocksMoving = false;
 		for (int v = 0; v < rocks.size(); v++) {
@@ -131,7 +123,7 @@ public class ObjectManager implements ActionListener {
 			rockAdded = false;
 		}
 		if (rockAdded == false) {
-			
+
 			addRock(new Rock(Rock.rockXValue, Rock.rockStartingHeight - Rock.rockHeight));
 			Rock.rockStartingHeight = Rock.rockStartingHeight - Rock.rockHeight;
 			rockAdded = true;
@@ -140,7 +132,6 @@ public class ObjectManager implements ActionListener {
 
 	void draw(Graphics g) {
 
-		
 		for (int i = 0; i < rocks.size(); i++) {
 			rocks.get(i).draw(g);
 		}
@@ -162,6 +153,6 @@ public class ObjectManager implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		
+
 	}
 }
